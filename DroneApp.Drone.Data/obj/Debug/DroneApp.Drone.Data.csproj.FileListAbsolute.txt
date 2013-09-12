@@ -1,0 +1,11 @@
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\bin\Debug\DroneApp.Drone.Data.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\bin\Debug\DroneApp.Drone.Data.pdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\bin\Debug\DroneApp.Drone.Data.dll.mdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\bin\Debug\DroneApp.Drone.Data.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\bin\Debug\DroneApp.Drone.Data-Signed.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\obj\Debug\DroneApp.Drone.Data.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\obj\Debug\DroneApp.Drone.Data.pdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\obj\Debug\android\bin\DroneApp.Drone.Data.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\obj\Debug\res\values\strings.xml
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\obj\Debug\R.cs.flag
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Data\obj\Debug\uploadflags.txt

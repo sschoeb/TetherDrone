@@ -7,6 +7,9 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 //using SuperSocket.ClientEngine;
@@ -27,39 +30,95 @@ namespace DroneApp
 
         public void Start()
         {
-            Debug.WriteLine("Start command listener");
-            _webSocket.Log.Level = LogLevel.DEBUG;
-            _webSocket.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => true;
-            _webSocket.OnMessage += WebSocketOnOnMessage;
-            _webSocket.OnClose += WebSocketOnOnClose;
-            _webSocket.OnOpen += WebSocketOnOnOpen;
-            _webSocket.Connect();
+            Thread t = new Thread(Runner);
+            t.Name = "Command Receiver";
+            t.Start();
         }
 
-        private void WebSocketOnOnOpen(object sender, EventArgs eventArgs)
+        private void Runner()
         {
-            WebsocketReady = true;
-            WebSocketStateChanged(this, EventArgs.Empty);
+
+            while (true)
+            {
+                GetNextCommand();
+                Thread.Sleep(500);
+            }
+
+            //_webSocket.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => true;
+            //_webSocket.OnMessage += WebSocketOnOnMessage;
+            //_webSocket.OnClose += WebSocketOnOnClose;
+            //_webSocket.OnOpen += WebSocketOnOnOpen;
+
+            //try
+            //{
+            //    _webSocket.Connect();
+            //}
+            //catch (Exception)
+            //{
+            //    Thread.Sleep(100);
+            //    Runner();
+            //}
             
         }
 
-        private void WebSocketOnOnClose(object sender, CloseEventArgs closeEventArgs)
+        private void GetNextCommand()
         {
-            WebsocketReady = false;
-            WebSocketStateChanged(this, EventArgs.Empty);
-            _webSocket.Connect();
+            var request = WebRequest.Create(new Uri("http://tetherdrone.cloudapp.net/drone/commands.ashx"));
+            request.BeginGetResponse(asynchronousResult =>
+                {
+                    try
+                    {
+                        WebsocketReady = true;
+                        WebSocketStateChanged(this, EventArgs.Empty);
+                        var request1 = (HttpWebRequest)asynchronousResult.AsyncState;
+                        request1.Timeout = 100;
+                        var response = (HttpWebResponse)request1.EndGetResponse(asynchronousResult);
+                        using (var streamReader = new StreamReader(response.GetResponseStream()))
+                        {
+                            string resultString = streamReader.ReadToEnd();
+                            if (string.IsNullOrWhiteSpace(resultString.Trim()))
+                            {
+                                return;
+                            }
+                            Debug.WriteLine("REsult: " + resultString);
+                            string[] lines = resultString.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                            foreach (string part in lines)
+                            {
+                                if (!string.IsNullOrEmpty(part.Trim()))
+                                {
+                                    CommandReceived(this, new CommandEventArgs { Command = part.Trim() });
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        //TODO: Error handling
+                    }
+                }, request);
         }
 
-        private void WebSocketOnOnMessage(object sender, MessageEventArgs messageEventArgs)
-        {
-            CommandReceived(this, new CommandEventArgs { Command = messageEventArgs.Data.Trim() });
-        }
+        //private void WebSocketOnOnOpen(object sender, EventArgs eventArgs)
+        //{
+        //    WebsocketReady = true;
+        //    WebSocketStateChanged(this, EventArgs.Empty);
+        //}
 
+        //private void WebSocketOnOnClose(object sender, CloseEventArgs closeEventArgs)
+        //{
+        //    WebsocketReady = false;
+        //    WebSocketStateChanged(this, EventArgs.Empty);
+        //    _webSocket.Connect();
+        //}
+
+        //private void WebSocketOnOnMessage(object sender, MessageEventArgs messageEventArgs)
+        //{
+        //    CommandReceived(this, new CommandEventArgs { Command = messageEventArgs.Data.Trim() });
+        //}
 
         public void Stop()
         {
         }
-
     }
 }
 

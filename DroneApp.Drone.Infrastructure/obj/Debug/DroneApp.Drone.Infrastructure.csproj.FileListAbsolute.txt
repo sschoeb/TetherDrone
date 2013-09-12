@@ -1,0 +1,11 @@
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\bin\Debug\DroneApp.Drone.Infrastructure.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\bin\Debug\DroneApp.Drone.Infrastructure.pdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\bin\Debug\DroneApp.Drone.Infrastructure.dll.mdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\bin\Debug\DroneApp.Drone.Infrastructure.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\bin\Debug\DroneApp.Drone.Infrastructure-Signed.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\obj\Debug\DroneApp.Drone.Infrastructure.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\obj\Debug\DroneApp.Drone.Infrastructure.pdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\obj\Debug\android\bin\DroneApp.Drone.Infrastructure.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\obj\Debug\res\values\strings.xml
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\obj\Debug\R.cs.flag
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\DroneApp.Drone.Infrastructure\obj\Debug\uploadflags.txt

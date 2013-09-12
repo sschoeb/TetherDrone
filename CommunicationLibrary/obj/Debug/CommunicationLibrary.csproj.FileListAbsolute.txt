@@ -1,8 +1,8 @@
 C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Debug\CommunicationLibrary.dll
 C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Debug\CommunicationLibrary.pdb
 C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Debug\websocket-sharp.dll
 C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\obj\Debug\CommunicationLibrary.csprojResolveAssemblyReference.cache
 C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\obj\Debug\CommunicationLibrary.dll
 C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\obj\Debug\CommunicationLibrary.pdb
-C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Debug\websocket-sharp.dll

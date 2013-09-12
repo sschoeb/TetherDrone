@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using AR.Drone.Client;
 using AR.Drone.Client.Commands;
-using AR.Drone.Data.Navigation;
 using Android.App;
 using Android.Content.PM;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.Locations;
 using Android.OS;
 using Android.Widget;
@@ -23,21 +21,24 @@ namespace DroneApp
     {
         private DroneClient _client;
         private LocationManager _locationManager;
-        private string _locationProvider;
         private TextView _logTextView;
         private TextView _dronStateTextView;
         private TextView _websocketTextView;
+        private CheckBox _checkBox;
         private CommandReceiver _receiver;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            InitializeLocationManager();
 
             SetContentView(Resource.Layout.Main);
 
-            //FindViewById<Button>(Resource.Id.MyButton).Click += StartButtonClick;
             FindViewById<Button>(Resource.Id.MyButtonLand).Click += LandButtonClick;
             FindViewById<Button>(Resource.Id.ButtonEmergency).Click += EmergencyButtonClicked;
+            FindViewById<Button>(Resource.Id.buttonReset).Click += (sender, args) => _client.ResetEmergency();
+            _checkBox = FindViewById<CheckBox>(Resource.Id.executeCommandsCheckBox);
+            _checkBox.CheckedChange += CheckBoxOnCheckedChange;
 
             _logTextView = FindViewById<TextView>(Resource.Id.logTextView);
             _dronStateTextView = FindViewById<TextView>(Resource.Id.droneStateTextView);
@@ -46,17 +47,20 @@ namespace DroneApp
             _client = new DroneClient("192.168.1.248");
             _client.Start();
 
-            _client.NavigationDataAcquired += ClientOnNavigationDataAcquired;
+            //_client.NavigationDataAcquired += ClientOnNavigationDataAcquired;
 
             _receiver = new CommandReceiver();
             _receiver.CommandReceived += ReceiverOnCommandReceived;
             _receiver.WebSocketStateChanged += ReceiverOnWebSocketStateChanged;
             _receiver.Start();
 
-            InitializeLocationManager();
-
-            var droneConnectionChecker = new Thread(ConnectionCheckRunner);
+            var droneConnectionChecker = new Thread(ConnectionCheckRunner) {Name = "Drone Checker"};
             droneConnectionChecker.Start();
+        }
+
+        private void CheckBoxOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs checkedChangeEventArgs)
+        {
+            _executeCommands = _checkBox.Checked;
         }
 
         private void ReceiverOnWebSocketStateChanged(object sender, EventArgs eventArgs)
@@ -68,6 +72,7 @@ namespace DroneApp
             else
             {
                 RunOnUiThread(() => _websocketTextView.SetBackgroundColor(new Color(255, 0, 0)));
+                _client.Hover();
             }
         }
 
@@ -78,7 +83,6 @@ namespace DroneApp
                 try
                 {
                     var addr = InetAddress.GetByName("192.168.1.248");
-                    NetworkInterface iFace = NetworkInterface.GetByInetAddress(addr);
 
                     if (addr.IsReachable(50))
                     {
@@ -92,11 +96,11 @@ namespace DroneApp
                     Thread.Sleep(100);
 
                 }
-                catch (UnknownHostException ex)
+                catch (UnknownHostException)
                 {
                     RunOnUiThread(() => _dronStateTextView.SetBackgroundColor(new Color(255, 0, 0)));
                 }
-                catch (IOException ex)
+                catch (IOException)
                 {
                     RunOnUiThread(() => _dronStateTextView.SetBackgroundColor(new Color(255, 0, 0)));
                 }
@@ -107,7 +111,12 @@ namespace DroneApp
         protected override void OnResume()
         {
             base.OnResume();
-            _locationManager.RequestLocationUpdates(_locationProvider, 1000, 0, this);
+            IList<string> acceptableLocationProviders = _locationManager.GetProviders(new Criteria(), true);
+            foreach (var acceptableLocationProvider in acceptableLocationProviders)
+            {
+                _locationManager.RequestLocationUpdates(acceptableLocationProvider, 1000, 0, this);
+            }
+            
         }
 
         protected override void OnPause()
@@ -119,31 +128,22 @@ namespace DroneApp
         private void InitializeLocationManager()
         {
             _locationManager = (LocationManager)GetSystemService(LocationService);
-            var criteriaForLocationService = new Criteria();
-            //{
-            //    Accuracy = Accuracy.Fine
-            //};
-            var acceptableLocationProviders = _locationManager.GetProviders(criteriaForLocationService, true);
-
-            if (acceptableLocationProviders.Any())
-            {
-                _locationProvider = acceptableLocationProviders.First();
-            }
-            else
-            {
-                _locationProvider = string.Empty;
-            }
         }
 
         private void EmergencyButtonClicked(object sender, EventArgs eventArgs)
         {
             Log("Local Command: Emergency");
             _client.Emergency();
+
         }
 
         private void ReceiverOnCommandReceived(object sender, CommandEventArgs eventArgs)
         {
             Log(eventArgs.Command);
+            if (!_executeCommands)
+            {
+                return;
+            }
             switch (eventArgs.Command)
             {
                 case "takeoff":
@@ -162,7 +162,7 @@ namespace DroneApp
                     _client.Progress(FlightMode.Progressive, yaw: 0.25f);
                     break;
                 case "forward":
-                    _client.Progress(FlightMode.Progressive, pitch: -0.05f);
+                    _client.Progress(FlightMode.Progressive, pitch: -0.5f);
                     break;
                 case "turnright":
                     _client.Progress(FlightMode.Progressive, yaw: -0.25f);
@@ -177,7 +177,7 @@ namespace DroneApp
                     _client.Progress(FlightMode.Progressive, roll: 0.05f);
                     break;
                 case "back":
-                    _client.Progress(FlightMode.Progressive, pitch: 0.05f);
+                    _client.Progress(FlightMode.Progressive, pitch: 0.5f);
                     break;
                 default:
                     Debug.WriteLine("Unknown Command: " + eventArgs.Command);
@@ -185,10 +185,21 @@ namespace DroneApp
             }
         }
 
-        private void ClientOnNavigationDataAcquired(NavigationData navigationData)
-        {
-            Sender.SendNavigationData(navigationData);
-        }
+        private bool _executeCommands;
+
+        //private void ClientOnNavigationDataAcquired(NavigationData navigationData)
+        //{
+        //    //count++;
+        //    //if (count % 100 == 0)
+        //    //{
+        //    //    Log("DUmp" + count + " / " + (navigationData.Magneto.Rectified.Y) + "/" + navigationData.Magneto.Heading);
+        //    //}
+
+        //    //Debug.WriteLine("Dump");
+        //    //Debug.WriteLine("Data aquired: " + navigationData.Battery.Percentage);
+        //    //Log(navigationData.Magneto.Radius + "");
+        //    //Sender.SendNavigationData(navigationData);
+        //}
 
         private void LandButtonClick(object sender, EventArgs eventArgs)
         {
@@ -218,7 +229,11 @@ namespace DroneApp
 
         private void Log(string data)
         {
-            RunOnUiThread(() => { _logTextView.Text = data + "\r\n" + _logTextView.Text; });
+            RunOnUiThread(() =>
+                {
+                    Debug.WriteLine(data);
+                    _logTextView.Text = data + "\r\n" + _logTextView.Text;
+                });
         }
 
         public void OnProviderDisabled(string provider)

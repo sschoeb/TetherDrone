@@ -55,13 +55,27 @@
     android:layout_alignParentBottom="true"
     />
 
+  <Button
+  android:id="@+id/buttonReset"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:text="Reset"
+  android:layout_above="@id/ButtonEmergency"
+    />
+
+  <CheckBox android:id="@+id/executeCommandsCheckBox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Send to Drone"
+            android:layout_above="@id/buttonReset"/>
+
   <TextView android:id="@+id/logTextView"
             android:background="#FFF"
             android:layout_below="@id/serviceStateTextView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
              android:layout_margin="2dp"
-            android:layout_above="@id/ButtonEmergency"
+            android:layout_above="@id/executeCommandsCheckBox"
             />
 
 </RelativeLayout>

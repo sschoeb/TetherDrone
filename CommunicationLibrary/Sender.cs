@@ -17,7 +17,7 @@ namespace CommunicationLibrary
 
         public static void SendNavigationData(object data)
         {
-            SendData(data, "http://tetherdrone.cloudapp.net/drone/navigation.ashx");
+            //SendData(data, "http://tetherdrone.cloudapp.net/drone/navigation.ashx");
         }
 
         private static void SendData(object data, string url)
@@ -28,17 +28,30 @@ namespace CommunicationLibrary
             request.Method = "POST";
             request.ContentType = "application/json";
 
-            request.BeginGetRequestStream(result =>
+            try
+            {
+                request.BeginGetRequestStream(result =>
                 {
-                    var requestInternal = (HttpWebRequest)result.AsyncState;
-
-                    using (Stream stream = requestInternal.EndGetRequestStream(result))
+                    try
                     {
-                        stream.Write(Encoding.UTF8.GetBytes(json), 0, Encoding.UTF8.GetBytes(json).Length);
-                    }
+                        var requestInternal = (HttpWebRequest)result.AsyncState;
 
-                    requestInternal.BeginGetResponse(GetResponseCallback, request);
+                        using (Stream stream = requestInternal.EndGetRequestStream(result))
+                        {
+                            stream.Write(Encoding.UTF8.GetBytes(json), 0, Encoding.UTF8.GetBytes(json).Length);
+                        }
+
+                        requestInternal.BeginGetResponse(GetResponseCallback, request);
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }, request);
+            }
+            catch (Exception)
+            {
+            }
+
         }
 
         private static void GetResponseCallback(IAsyncResult result)
@@ -47,7 +60,8 @@ namespace CommunicationLibrary
             try
             {
                 var response = (HttpWebResponse)request.EndGetResponse(result);
-                Debug.WriteLine("Response: " + response);
+                string responseData = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                Debug.WriteLine("Response: " + responseData);
             }
             catch (Exception ex)
             {
