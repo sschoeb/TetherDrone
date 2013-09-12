@@ -1,0 +1,7 @@
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\obj\Release\CommunicationLibrary.csprojResolveAssemblyReference.cache
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Release\CommunicationLibrary.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Release\CommunicationLibrary.pdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Release\Newtonsoft.Json.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\bin\Release\Newtonsoft.Json.xml
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\obj\Release\CommunicationLibrary.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\obj\Release\CommunicationLibrary.pdb

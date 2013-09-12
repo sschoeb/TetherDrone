@@ -1,0 +1,2 @@
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\bin\Debug\TestWebSocket.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\CommunicationLibrary\libs\websocket-sharp.dll

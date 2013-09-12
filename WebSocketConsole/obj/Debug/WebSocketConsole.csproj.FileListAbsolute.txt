@@ -1,0 +1,7 @@
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\WebSocketConsole\bin\Debug\WebSocketConsole.exe.config
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\WebSocketConsole\bin\Debug\WebSocketConsole.exe
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\WebSocketConsole\bin\Debug\WebSocketConsole.pdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\WebSocketConsole\bin\Debug\WebSocket4Net.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\WebSocketConsole\obj\Debug\WebSocketConsole.csprojResolveAssemblyReference.cache
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\WebSocketConsole\obj\Debug\WebSocketConsole.exe
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\WebSocketConsole\obj\Debug\WebSocketConsole.pdb

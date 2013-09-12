@@ -1,0 +1,14 @@
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\bin\Debug\TestWebSocket.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\bin\Debug\TestWebSocket.pdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\bin\Debug\TestWebSocket.dll.mdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\bin\Debug\TestWebSocket.TestWebSocket.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\bin\Debug\TestWebSocket.TestWebSocket-Signed.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\obj\Debug\TestWebSocket.dll
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\obj\Debug\TestWebSocket.pdb
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\obj\Debug\android\bin\TestWebSocket.TestWebSocket.apk
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\obj\Debug\res\layout\main.xml
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\obj\Debug\res\values\strings.xml
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\obj\Debug\res\drawable\icon.png
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\obj\Debug\R.cs.flag
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\obj\Debug\uploadflags.txt
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\TestWebSocket\bin\Debug\websocket-sharp.dll

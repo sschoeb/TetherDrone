@@ -1,0 +1,1 @@
+C:\Users\ssh\documents\visual studio 2012\Projects\DroneApp\WebSocketConsole\bin\Release\WebSocketConsole.exe.config
